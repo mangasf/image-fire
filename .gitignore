@@ -1,0 +1,4 @@
+vagrant/.vagrant/*
+.idea
+playbook_development.retry
+ansible/roles

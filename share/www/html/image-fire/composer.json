@@ -1,0 +1,15 @@
+{
+    "name": "mangasf/image-fire",
+    "description": "Image fire project.",
+    "require": {
+        "php": "^7.0",
+        "php-amqplib/php-amqplib": ">=2.6.1",
+        "elasticsearch/elasticsearch": "^6.0",
+        "twig/twig": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mangasf\\ImageFire\\": "src/"
+        }
+    }
+}

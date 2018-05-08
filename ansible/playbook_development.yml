@@ -1,0 +1,37 @@
+---
+- name: (MPWAR 2018) Ruben Cougil Playbook
+  hosts: "webservers"
+  become: true
+  become_user: root
+  pre_tasks:
+    - selinux:
+        policy: targeted
+        state: permissive
+    - import_tasks: mysql-community.yml
+
+  roles:
+    - { role: geerlingguy.ntp, ntp_timezone: Europe/Madrid }
+    - { role: geerlingguy.repo-remi, when: ansible_os_family == 'RedHat' }
+    - { role: geerlingguy.repo-epel, when: ansible_os_family == 'RedHat' }
+    - { role: geerlingguy.apache }
+    - { role: geerlingguy.git }
+    - { role: geerlingguy.php-versions }
+    - { role: geerlingguy.php }
+    - { role: geerlingguy.composer }
+    - { role: ferrarimarco.nano }
+    - { role: geerlingguy.java, java_packages: [java-1.8.0-openjdk] }
+    - { role: geerlingguy.mysql }
+    - { role: geerlingguy.blackfire }
+    - { role: geerlingguy.redis, redis_bind_interface: 0.0.0.0 }
+    - { role: geerlingguy.rabbitmq }
+    - { role: rubencougil.elasticsearch }
+    - { role: rubencougil.kibana }
+
+  post_tasks:
+    - name: (RabbitMQ) enable management plugin
+      sudo: yes
+      shell: rabbitmq-plugins enable rabbitmq_management
+
+    - name: (RabbitMQ) create admin user
+      sudo: yes
+      shell: rabbitmqctl add_user admin admin && rabbitmqctl set_user_tags admin administrator && rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
