@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Mangasf\ImageFire\Infrastructure\Repositories;
 
-use Mangasf\ImageFire\Domain\Models\Image;
-use Mangasf\ImageFire\Domain\Repositories\ListImagesRepository;
+use Mangasf\ImageFire\Domain\Repositories\DeleteImageRepository;
 use PDO;
 use PDOException;
 
-final class ListImagesMysql implements ListImagesRepository
+final class DeleteImageMysql implements DeleteImageRepository
 {
     private $connection;
 
@@ -27,19 +26,11 @@ final class ListImagesMysql implements ListImagesRepository
         }
     }
 
-    public function getAllImages(): array
+    public function deleteImage(int $imageId)
     {
-        $query = 'SELECT id, name, contain FROM Images';
+        $query = "DELETE FROM Images WHERE id = ?";
         $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(1, $imageId);
         $stmt->execute();
-        $rows = $stmt->fetchAll();
-        $images = [];
-
-        foreach ($rows as $row) {
-            $image = new Image((int)$row['id'], $row['name'], $row['contain']);
-            array_push($images, $image);
-        }
-
-        return $images;
     }
 }

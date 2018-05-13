@@ -37,6 +37,12 @@
                             aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
                             dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
                     </div>
+                    <div class="card-footer text-muted">
+                        <form method="POST" action="delete.php">
+                            <input type="hidden" name="id" value="{{ image.id }}" />
+                            <button type="submit" value="delete" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         {% endfor %}
