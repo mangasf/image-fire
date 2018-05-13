@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mangasf\ImageFire\Domain;
+namespace Mangasf\ImageFire\Domain\Models;
 
 final class Image
 {
@@ -13,5 +13,15 @@ final class Image
     {
         $this->name = $name;
         $this->contain = $contain;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getContain(): string
+    {
+        return $this->contain;
     }
 }

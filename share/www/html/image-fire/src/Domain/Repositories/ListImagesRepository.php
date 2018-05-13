@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mangasf\ImageFire\Domain;
+namespace Mangasf\ImageFire\Domain\Repositories;
 
 interface ListImagesRepository
 {
