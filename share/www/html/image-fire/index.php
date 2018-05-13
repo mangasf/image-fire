@@ -1,12 +1,19 @@
 <?php
 
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 require 'autoload.php';
 
-$twig = new Twig_Environment($loader, array(
-    'debug' => true
-));
+use Mangasf\ImageFire\Application\Service\ListImages;
+use Mangasf\ImageFire\Infrastructure\Repositories\ListImagesMysql;
 
-$twig->addExtension(new Twig_Extension_Debug());
+$listRepo = new ListImagesMysql();
+$imagesLister = new ListImages($listRepo);
+$imagesList = $imagesLister();
 
-echo $twig->render('index.twig');
+echo $twig->render('index.twig',
+    [
+        'images' => $imagesList
+    ]);
 

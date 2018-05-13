@@ -23,3 +23,7 @@ body {
 .container.container-uploader {
   margin-top: 50px;
 }
+
+.logo {
+  width: 8%;
+}

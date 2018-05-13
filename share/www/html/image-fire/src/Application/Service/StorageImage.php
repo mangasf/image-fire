@@ -19,7 +19,6 @@ final class StorageImage
 
     public function __invoke(Image $image)
     {
-        var_dump($image);
         try {
             $this->repoImageInserter->storageImage($image);
         } catch (PDOException $exception) {
