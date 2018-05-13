@@ -16,11 +16,15 @@
         <a class="navbar-brand" href="#">
             <img class="logo" src="assets/images/icon-fire.png">Image Fire
         </a>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </nav>
 <div class="container container-uploader">
     <div class='content'>
-        <form action="upload.php" class="dropzone" id="dropzonewidget"></form>
+        <form method="POST" action="src/Controllers/Upload.php" class="dropzone" id="dropzonewidget"></form>
     </div>
 </div>
 <div class="container container-images">
@@ -38,7 +42,14 @@
                             dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
                     </div>
                     <div class="card-footer text-muted">
-                        <form method="POST" action="delete.php">
+                        <form method="POST" action="src/Controllers/Edit.php">
+                            <input type="hidden" name="id" value="{{ image.id }}" />
+                            <input type="hidden" name="name" value="{{ image.name }}" />
+                            <input type="hidden" name="description" value="{{ image.description }}" />
+                            <input type="hidden" name="tags" value="{{ image.tags }}" />
+                            <button type="submit" value="delete" class="btn btn-outline-warning btn-sm">Edit</button>
+                        </form>
+                        <form method="POST" action="src/Controllers/Delete.php">
                             <input type="hidden" name="id" value="{{ image.id }}" />
                             <button type="submit" value="delete" class="btn btn-outline-danger btn-sm">Delete</button>
                         </form>

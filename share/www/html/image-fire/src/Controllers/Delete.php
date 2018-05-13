@@ -1,6 +1,6 @@
 <?php
 
-require 'autoload.php';
+require '../../autoload.php';
 
 use Mangasf\ImageFire\Application\Service\DeleteImage;
 use Mangasf\ImageFire\Infrastructure\Repositories\DeleteImageMysql;
@@ -25,7 +25,7 @@ if ($_POST) {
         echo $twig->render('notification.twig',
             [
                 'type' => 'success',
-                'message' => 'The image has been successfully eliminated.' . $message
+                'message' => 'The image could not be deleted.' . $message
             ]
         );
     }

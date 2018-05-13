@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Image Fire</title>
+    <link href="../../assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+    <link href='../../libs/dropzone/dropzone.css' type='text/css' rel='stylesheet'>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="../../assets/images/icon-fire.png">Image Fire
+        </a>
+    </div>
+</nav>
+<div class="container container-form-edit">
+    <form method="PATCH" action="/">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" readonly>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <input type="text" class="form-control" id="tags" placeholder="Tags">
+            <p class="form-edit-marktext">* Enter the tags separated by commas.</p>
+        </div>
+        <div class="row row-buttons">
+            <button type="submit" class="btn btn-outline-success btn-sm btn-back">Save</button>
+            <a class="btn btn-outline-primary btn-sm btn-back" role="button" href="../../index.php">Back</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

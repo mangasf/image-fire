@@ -24,12 +24,30 @@ body {
   margin-top: 50px;
 }
 
+.container.container-form-edit {
+  width: 600px;
+  margin-top: 50px;
+}
+
+.container.container-form-edit .row.row-buttons {
+  display: block;
+  text-align: center;
+}
+
+.form-edit-marktext {
+  font-size: 0.8em;
+}
+
 .logo {
   width: 8%;
 }
 
 .btn.btn-outline-danger.btn-sm {
   float: right;
+}
+
+.btn.btn-outline-warning.btn-sm {
+  float: left;
 }
 
 .img-fire-notification {

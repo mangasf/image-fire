@@ -9,6 +9,8 @@ final class Image
     private $id;
     private $name;
     private $contain;
+    private $description;
+    private $tags;
 
     public function __construct(int $id, string $name, string $contain)
     {
