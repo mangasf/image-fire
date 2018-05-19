@@ -29,14 +29,14 @@ final class ListImagesMysql implements ListImagesRepository
 
     public function getAllImages(): array
     {
-        $query = 'SELECT id, name, contain FROM Images';
+        $query = 'SELECT id, name, contain, description, tags FROM Images';
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
         $rows = $stmt->fetchAll();
         $images = [];
 
         foreach ($rows as $row) {
-            $image = new Image((int)$row['id'], $row['name'], $row['contain']);
+            $image = new Image((int)$row['id'], $row['name'], $row['contain'], $row['description'], $row['tags']);
             array_push($images, $image);
         }
 

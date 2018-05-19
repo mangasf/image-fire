@@ -37,20 +37,24 @@
                         <h4 class="card-title">
                             <a href="#">{{ image.name }}</a>
                         </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                            aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-                            dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                        <p class="card-text">{{ image.description }}</p>
+                        {% if image.tags != '' %}
+                            {% for tag in image.tags | split(',') %}
+                                <div class="tag"># {{ tag }}</div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="card-footer text-muted">
                         <form method="POST" action="src/Controllers/Edit.php">
-                            <input type="hidden" name="id" value="{{ image.id }}" />
-                            <input type="hidden" name="name" value="{{ image.name }}" />
-                            <input type="hidden" name="description" value="{{ image.description }}" />
-                            <input type="hidden" name="tags" value="{{ image.tags }}" />
+                            <input type="hidden" name="id" value="{{ image.id }}"/>
+                            <input type="hidden" name="name" value="{{ image.name }}"/>
+                            <input type="hidden" name="contain" value="{{ image.contain }}"/>
+                            <input type="hidden" name="description" value="{{ image.description }}"/>
+                            <input type="hidden" name="tags" value="{{ image.tags }}"/>
                             <button type="submit" value="delete" class="btn btn-outline-warning btn-sm">Edit</button>
                         </form>
                         <form method="POST" action="src/Controllers/Delete.php">
-                            <input type="hidden" name="id" value="{{ image.id }}" />
+                            <input type="hidden" name="id" value="{{ image.id }}"/>
                             <button type="submit" value="delete" class="btn btn-outline-danger btn-sm">Delete</button>
                         </form>
                     </div>

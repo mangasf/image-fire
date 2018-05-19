@@ -19,23 +19,26 @@
     </div>
 </nav>
 <div class="container container-form-edit">
-    <form method="PATCH" action="/">
+    <form method="POST" action="Upload.php">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" readonly>
+            <input type="text" class="form-control" name="name" id="name" value="{{ imageName }}" readonly>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description">
+            <input type="text" class="form-control" id="description" name="description" value="{{ imageDescription }}"
+                   placeholder="Description">
         </div>
         <div class="form-group">
             <label for="tags">Tags</label>
-            <input type="text" class="form-control" id="tags" placeholder="Tags">
+            <input type="text" class="form-control" name="tags" id="tags" value="{{ imageTags }}" placeholder="Tags">
             <p class="form-edit-marktext">* Enter the tags separated by commas.</p>
         </div>
         <div class="row row-buttons">
-            <button type="submit" class="btn btn-outline-success btn-sm btn-back">Save</button>
+            <input type="hidden" name="id" value="{{ imageId }}" />
+            <input type="hidden" name="contain" value="{{ imageContain }}" />
             <a class="btn btn-outline-primary btn-sm btn-back" role="button" href="../../index.php">Back</a>
+            <button type="submit" value="update" class="btn btn-outline-success btn-sm">Save</button>
         </div>
     </form>
 </div>

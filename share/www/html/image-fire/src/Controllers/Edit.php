@@ -6,15 +6,19 @@ if ($_POST) {
 
     $imageId = (int)$_POST['id'];
     $imageName = $_POST['name'];
-    $imageDescription = $_POST['desc'];
+    $imageContain = $_POST['contain'];
+    $imageDescription = $_POST['description'];
     $imageTags = $_POST['tags'];
 
     try {
 
         echo $twig->render('form-edit.twig',
             [
-                'type' => 'success',
-                'message' => 'The image has been successfully updated.'
+                'imageId' => $imageId,
+                'imageName' => $imageName,
+                'imageContain' => $imageContain,
+                'imageDescription' => $imageDescription,
+                'imageTags' => $imageTags
             ]
         );
     } catch (PDOException $exception) {

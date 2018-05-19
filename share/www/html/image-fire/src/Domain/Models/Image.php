@@ -12,11 +12,13 @@ final class Image
     private $description;
     private $tags;
 
-    public function __construct(int $id, string $name, string $contain)
+    public function __construct(int $id, string $name, string $contain, string $description, string $tags)
     {
         $this->id = $id;
         $this->name = $name;
         $this->contain = $contain;
+        $this->description = $description;
+        $this->tags = $tags;
     }
 
     public function getId(): int
@@ -32,5 +34,15 @@ final class Image
     public function getContain(): string
     {
         return $this->contain;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getTags(): string
+    {
+        return $this->tags;
     }
 }
