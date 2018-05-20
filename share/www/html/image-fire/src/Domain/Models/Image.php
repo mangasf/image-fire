@@ -12,7 +12,7 @@ final class Image
     private $description;
     private $tags;
 
-    public function __construct(int $id, string $name, string $contain, string $description, string $tags)
+    public function __construct(string $id, string $name, string $contain, string $description, string $tags)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,7 +21,7 @@ final class Image
         $this->tags = $tags;
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }

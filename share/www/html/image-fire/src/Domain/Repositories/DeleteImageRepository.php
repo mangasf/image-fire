@@ -6,5 +6,5 @@ namespace Mangasf\ImageFire\Domain\Repositories;
 
 interface DeleteImageRepository
 {
-    public function deleteImage(int $imageId);
+    public function deleteImage(string $imageId);
 }

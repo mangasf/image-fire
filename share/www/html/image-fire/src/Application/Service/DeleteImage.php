@@ -16,7 +16,7 @@ final class DeleteImage
         $this->repoImageRemover = $repoImageRemover;
     }
 
-    public function __invoke(int $imageId)
+    public function __invoke(string $imageId)
     {
         try {
             $this->repoImageRemover->deleteImage($imageId);

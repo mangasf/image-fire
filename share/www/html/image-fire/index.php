@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 require 'autoload.php';
 
 use Mangasf\ImageFire\Application\Service\ListImages;
-use Mangasf\ImageFire\Infrastructure\Repositories\ListImagesMysql;
+use Mangasf\ImageFire\Infrastructure\Repositories\MySql\ListImagesMysql;
 
 $listRepo = new ListImagesMysql();
 $imagesLister = new ListImages($listRepo);

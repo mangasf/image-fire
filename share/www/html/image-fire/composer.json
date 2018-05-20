@@ -5,7 +5,8 @@
         "php": "^7.0",
         "php-amqplib/php-amqplib": ">=2.6.1",
         "elasticsearch/elasticsearch": "^6.0",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "predis/predis": "^1.1"
     },
     "autoload": {
         "psr-4": {

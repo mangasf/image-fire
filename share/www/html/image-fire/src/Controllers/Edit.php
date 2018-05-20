@@ -1,10 +1,13 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require '../../autoload.php';
 
 if ($_POST) {
 
-    $imageId = (int)$_POST['id'];
+    $imageId = $_POST['id'];
     $imageName = $_POST['name'];
     $imageContain = $_POST['contain'];
     $imageDescription = $_POST['description'];

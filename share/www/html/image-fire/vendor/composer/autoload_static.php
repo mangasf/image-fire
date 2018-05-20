@@ -27,6 +27,7 @@ class ComposerStaticInitfdf6353a7d9b2efc5f36e53bf6bdb55b
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Predis\\' => 7,
             'PhpAmqpLib\\' => 11,
         ),
         'M' => 
@@ -60,6 +61,10 @@ class ComposerStaticInitfdf6353a7d9b2efc5f36e53bf6bdb55b
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
         'PhpAmqpLib\\' => 
         array (

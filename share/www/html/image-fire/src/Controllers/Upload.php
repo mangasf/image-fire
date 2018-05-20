@@ -8,27 +8,26 @@ require '../../autoload.php';
 use Mangasf\ImageFire\Application\Service\StorageImage;
 use Mangasf\ImageFire\Application\Service\UpdateImage;
 use Mangasf\ImageFire\Domain\Models\Image;
-use Mangasf\ImageFire\Infrastructure\Repositories\StorageImageMysql;
-use Mangasf\ImageFire\Infrastructure\Repositories\UpdateImageMysql;
+use Mangasf\ImageFire\Infrastructure\Repositories\Elastic\StorageImageElastic;
+use Mangasf\ImageFire\Infrastructure\Repositories\Elastic\UpdateImageElastic;
+use Mangasf\ImageFire\Infrastructure\Repositories\MySql\StorageImageMysql;
+use Mangasf\ImageFire\Infrastructure\Repositories\MySql\UpdateImageMysql;
 
 if ($_POST) {
-    $imageId = (int)$_POST['id'];
+    $imageId = $_POST['id'];
     $imageName = $_POST['name'];
     $imageContain = $_POST['contain'];
     $imageDescription = $_POST['description'];
     $imageTags = $_POST['tags'];
-    var_dump($imageId);
-    var_dump($imageName);
-    var_dump($imageContain);
-    var_dump($imageDescription);
-    var_dump($imageTags);
     $image = new Image($imageId, $imageName, $imageContain, $imageDescription, $imageTags);
-    $updateRepo = new UpdateImageMysql();
-    $updateImage = new UpdateImage($updateRepo);
-    $updateImage($image);
+    $updateRepoMysql = new UpdateImageMysql();
+    $updateRepoElastic = new UpdateImageElastic();
+    $updateImageMysql = new UpdateImage($updateRepoMysql);
+    $updateImageElastic = new UpdateImage($updateRepoElastic);
+    $updateImageMysql($image);
+    $updateImageElastic($image);
     header("Location: ../../index.php");
 } else {
-    var_dump('NEW');
     $target_dir = "../../upload/";
     $storage_dir = "upload/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -37,8 +36,12 @@ if ($_POST) {
         $status = 1;
     }
 
-    $image = new Image(0, $_FILES['file']['name'], $storage_dir . $_FILES['file']['name'], '', '');
-    $storageRepo = new StorageImageMysql();
-    $storageImage = new StorageImage($storageRepo);
-    $storageImage($image);
+    $uuid = uniqid();
+    $image = new Image($uuid, $_FILES['file']['name'], $storage_dir . $_FILES['file']['name'], '', '');
+    $storageRepoMysql = new StorageImageMysql();
+    $storageRepoElastic = new StorageImageElastic();
+    $storageImageMysql = new StorageImage($storageRepoMysql);
+    $storageImageElastic = new StorageImage($storageRepoElastic);
+    $storageImageMysql($image);
+    $storageImageElastic($image);
 }
