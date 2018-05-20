@@ -53,7 +53,7 @@ Para poder usar la aplicación necesitamos crear la BD Mysql, lo hacemos ejecuta
 
 La integración de ElasticSearch nos permite, además de mejorar la disponibilidad de datos en la aplicación, la búsqueda rápida de imágenes por tags.
 
-Al hacer una subida de una imágen la información de esta nos solo se guarda en MySql sino que es también persistida en Elastic. De esta manera desde el buscados de la aplicación podermos buscar de manera rápida imágenes, tirando querys contra Elastic.
+Al hacer una subida de una imágen la información de esta no solo se guarda en MySql sino que es también persistida en Elastic. De esta manera desde el buscados de la aplicación podermos buscar de manera rápida imágenes, tirando querys contra Elastic.
 
 Las operaciones de borrado y edición de imágenes también son tiradas contra Elastic para mantener consistencia entre los dos sitemas.
 
