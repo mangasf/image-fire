@@ -25,6 +25,7 @@ final class StorageImageElastic implements StorageImageRepository
             'id' => $image->getId(),
             'body' => [
                 'name' => $image->getName(),
+                'contain' => $image->getContain(),
                 'description' => $image->getDescription(),
                 'tags' => $image->getTags()
             ]
