@@ -6,7 +6,8 @@
         "php-amqplib/php-amqplib": ">=2.6.1",
         "elasticsearch/elasticsearch": "^6.0",
         "twig/twig": "^2.4",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "gumlet/php-image-resize": "^1.8"
     },
     "autoload": {
         "psr-4": {

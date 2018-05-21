@@ -38,6 +38,7 @@ class ComposerStaticInitfdf6353a7d9b2efc5f36e53bf6bdb55b
         array (
             'GuzzleHttp\\Stream\\' => 18,
             'GuzzleHttp\\Ring\\' => 16,
+            'Gumlet\\' => 7,
         ),
         'E' => 
         array (
@@ -81,6 +82,10 @@ class ComposerStaticInitfdf6353a7d9b2efc5f36e53bf6bdb55b
         'GuzzleHttp\\Ring\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
+        ),
+        'Gumlet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gumlet/php-image-resize/lib',
         ),
         'Elasticsearch\\' => 
         array (

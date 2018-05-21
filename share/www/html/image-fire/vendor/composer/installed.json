@@ -59,6 +59,62 @@
         ]
     },
     {
+        "name": "gumlet/php-image-resize",
+        "version": "1.8.0",
+        "version_normalized": "1.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gumlet/php-image-resize.git",
+            "reference": "203210e94849c809bdb97fff4f803a7932e2bc62"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/gumlet/php-image-resize/zipball/203210e94849c809bdb97fff4f803a7932e2bc62",
+            "reference": "203210e94849c809bdb97fff4f803a7932e2bc62",
+            "shasum": ""
+        },
+        "require": {
+            "ext-fileinfo": "*",
+            "ext-gd": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "ext-exif": "*",
+            "ext-gd": "*",
+            "php-coveralls/php-coveralls": "dev-master || ^1.0",
+            "phpunit/phpunit": "^4.8"
+        },
+        "suggest": {
+            "ext-exif": "Auto-rotate jpeg files"
+        },
+        "time": "2018-02-10T05:20:52+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Gumlet\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Aditya Patadia",
+                "homepage": "http://aditya.patadia.org/"
+            }
+        ],
+        "description": "PHP class to re-size and scale images",
+        "homepage": "https://github.com/gumlet/php-image-resize",
+        "keywords": [
+            "image",
+            "php",
+            "resize",
+            "scale"
+        ]
+    },
+    {
         "name": "guzzlehttp/ringphp",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
