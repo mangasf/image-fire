@@ -63,6 +63,10 @@ Además para mantener la consistencia de datos entre MySql y Redis las operacion
 
 *El potencial de Redis en Image Fire no es totalmente explotado debido a la sencillez de los casos de uso, sacaríamos un mayor provecho al ampliar la aplicación y añadir funcionalidades que requieran de un mayor numero de consultas sobre nuestro modelo de datos.*
 
+## RabiitMQ
+
+La integración de RabbitMQ permite a Image Fire la paralelización de la subida de imágenes. Una vez subida una imágen se la debe aplicar una serie de transformaciones (resizes, filtros, etc), con cada una de estas transformaciones asignaremos a la imágen los correspondientes tags que nos permitan luego buscarlas (elastic). Estos trabajos de procesamiento son almacenados en una cola mediante su publicación para ser posteriormente consumidos por uno o más consumers.
+
 ## ElasticSearch
 
 La integración de ElasticSearch nos permite, además de mejorar la disponibilidad de datos en la aplicación, la búsqueda rápida de imágenes por tags.
