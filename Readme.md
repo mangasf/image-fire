@@ -49,16 +49,24 @@ Para poder usar la aplicación necesitamos crear la BD Mysql, lo hacemos ejecuta
 - Edición de la información de una imágen (tags y descripción).
 - Aplicación de transformaciones a las imágenes subidas (RabbitMQ).
 
-# ElasticSearch
+## ElasticSearch
 
 La integración de ElasticSearch nos permite, además de mejorar la disponibilidad de datos en la aplicación, la búsqueda rápida de imágenes por tags.
 
-Al hacer una subida de una imágen la información de esta no solo se guarda en MySql sino que es también persistida en Elastic. De esta manera desde el buscados de la aplicación podermos buscar de manera rápida imágenes, tirando querys contra Elastic.
+Al hacer una subida de una imágen la información de esta no solo se guarda en MySql sino que es también persistida en Elastic. De esta manera desde el buscador de la aplicación podemos buscar de manera rápida imágenes, lanzando consultas contra Elastic.
 
-Las operaciones de borrado y edición de imágenes también son tiradas contra Elastic para mantener consistencia entre los dos sitemas.
+Las operaciones de borrado y edición de imágenes también son lanzadas contra Elastic para mantener consistencia entre los dos sitemas.
 
 En la siguiente imágen podemos ver el estado de los dos sistemas de persistencia trás la súbida de dos imágenes a la aplicación (Para la monitorización de Elastic usamos Kibana):
 
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/mysql_and_elasic_status.png)
 
+## Capturas de la aplicación
 
-# Capturas de la aplicación
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_1.png)
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_2.png)
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_3.png)
+
+## Autor
+
+Fran Mangas (https://github.com/mangasf)
