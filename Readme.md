@@ -49,6 +49,20 @@ Para poder usar la aplicación necesitamos crear la BD Mysql, lo hacemos ejecuta
 - Edición de la información de una imágen (tags y descripción).
 - Aplicación de transformaciones a las imágenes subidas (RabbitMQ).
 
+## Redis
+
+Redis es un almacén de estructura de datos de valores de clave en memoria rápido y de código abierto. Redis incorpora un conjunto de estructuras de datos en memoria versátiles que le permiten crear con facilidad diversas aplicaciones personalizadas.
+
+La integración de Redis en Image Fire tiene como objetivo aumentar la disponibilidad de los datos haciendo de cache, agiliza las consultas sobre las imágenes almacenadas.
+
+En el siguiente diagrama podemos ver un diagrama de flujo del caso de uso encargado del listado de imágenes guardadas:
+
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/redis-diagram.png)
+
+Además para mantener la consistencia de datos entre MySql y Redis las operaciones de edición, consulta y adición de imágenes también son ejecutadas sobre Redis.
+
+*El potencial de Redis en Image Fire no es totalmente explotado debido a la sencillez de los casos de uso, sacaríamos un mayor provecho al ampliar la aplicación y añadir funcionalidades que requieran de un mayor numero de consultas sobre nuestro modelo de datos.*
+
 ## ElasticSearch
 
 La integración de ElasticSearch nos permite, además de mejorar la disponibilidad de datos en la aplicación, la búsqueda rápida de imágenes por tags.
