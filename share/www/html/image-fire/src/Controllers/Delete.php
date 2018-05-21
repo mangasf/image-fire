@@ -8,6 +8,7 @@ require '../../autoload.php';
 use Mangasf\ImageFire\Application\Service\DeleteImage;
 use Mangasf\ImageFire\Infrastructure\Repositories\Elastic\DeleteImageElastic;
 use Mangasf\ImageFire\Infrastructure\Repositories\MySql\DeleteImageMysql;
+use Mangasf\ImageFire\Infrastructure\Repositories\Redis\DeleteImageRedis;
 
 if ($_POST) {
 
@@ -15,12 +16,17 @@ if ($_POST) {
 
     $deleteImageRepoMysql = new DeleteImageMysql();
     $deleteImageRepoElastic = new DeleteImageElastic();
+    $deleteImageRepoRedis = new DeleteImageRedis();
+
     $deleteImageMysql = new DeleteImage($deleteImageRepoMysql);
     $deleteImageElastic = new DeleteImage($deleteImageRepoElastic);
+    $deleteImageRedis = new DeleteImage($deleteImageRepoRedis);
 
     try {
         $deleteImageMysql($imageId);
         $deleteImageElastic($imageId);
+        $deleteImageRedis($imageId);
+
         echo $twig->render('notification.twig',
             [
                 'type' => 'success',

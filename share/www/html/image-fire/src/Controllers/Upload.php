@@ -14,6 +14,8 @@ use Mangasf\ImageFire\Infrastructure\Repositories\Elastic\StorageImageElastic;
 use Mangasf\ImageFire\Infrastructure\Repositories\Elastic\UpdateImageElastic;
 use Mangasf\ImageFire\Infrastructure\Repositories\MySql\StorageImageMysql;
 use Mangasf\ImageFire\Infrastructure\Repositories\MySql\UpdateImageMysql;
+use Mangasf\ImageFire\Infrastructure\Repositories\Redis\StorageImageRedis;
+use Mangasf\ImageFire\Infrastructure\Repositories\Redis\UpdateImageRedis;
 
 if ($_POST) {
     $imageId = $_POST['id'];
@@ -21,14 +23,23 @@ if ($_POST) {
     $imageContain = $_POST['contain'];
     $imageDescription = $_POST['description'];
     $imageTags = $_POST['tags'];
+
     $image = new Image($imageId, $imageName, $imageContain, $imageDescription, $imageTags);
+
     $updateRepoMysql = new UpdateImageMysql();
     $updateRepoElastic = new UpdateImageElastic();
+    $updateRepoRedis = new UpdateImageRedis();
+
     $updateImageMysql = new UpdateImage($updateRepoMysql);
     $updateImageElastic = new UpdateImage($updateRepoElastic);
+    $updateImageRedis = new UpdateImage($updateRepoRedis);
+
     $updateImageMysql($image);
     $updateImageElastic($image);
+    $updateImageRedis($image);
+
     header("Location: ../../index.php");
+
 } else {
     $target_dir = "../../upload/";
     $storage_dir = "upload/";
@@ -40,14 +51,20 @@ if ($_POST) {
 
     $uuid = uniqid();
     $image = new Image($uuid, $_FILES['file']['name'], $storage_dir . $_FILES['file']['name'], '', '');
+
     $storageRepoMysql = new StorageImageMysql();
     $storageRepoElastic = new StorageImageElastic();
+    $storageRepoRedis = new StorageImageRedis();
+
     $storageImageMysql = new StorageImage($storageRepoMysql);
     $storageImageElastic = new StorageImage($storageRepoElastic);
+    $storageImageRedis = new StorageImage($storageRepoRedis);
+
     $storageImageMysql($image);
     $storageImageElastic($image);
+    $storageImageRedis($image);
 
-    $queuesOrchestrator = new RabbitMQOrchestrator();
+    /*$queuesOrchestrator = new RabbitMQOrchestrator();
     $queuesPublishMessage = new QueuesPublishMessage($queuesOrchestrator);
 
     $transformations = [
@@ -70,5 +87,5 @@ if ($_POST) {
         ];
 
         $queuesPublishMessage('transformations', $data);
-    }
+    }*/
 }
