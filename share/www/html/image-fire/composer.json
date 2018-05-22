@@ -12,6 +12,9 @@
     "autoload": {
         "psr-4": {
             "Mangasf\\ImageFire\\": "src/"
+        },
+        "config": {
+            "optimize-autoloader": true
         }
     }
 }
