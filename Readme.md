@@ -79,11 +79,38 @@ En la siguiente imágen podemos ver el estado de los dos sistemas de persistenci
 
 ![alt text](https://github.com/mangasf/image-fire/blob/master/report/mysql_and_elasic_status.png)
 
+## Blackfire
+
+Hemos usado blackfire para hacer un análisis de rendimiento de la aplicación.
+
+Por una parte hemos hecho un estudio del impacto que tiene el uso de Redis en el rendimiento de la aplicación, lanzando dos análisis, uno primero sin tener datos cacheados y un segundo con datos cacheados.
+
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/blackfire_1.png)
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/blackfire_2.png)
+
+Como vemos en las imágenes el rendimiento haciendo uso de Redis es hasta un 15% superior.
+
+También hemos usado blackfire para detectar las posibles optimizaciones que podemos realizar y los cuellos de botella que presenta nuestra aplicación.
+
+Despúes de hacer el análisis hemos aplicado dos optimizaciones:
+
+- Activación de la cache de Twig.
+- Activar la optimización de Autoloader.
+
+La mejora conseguida es aproximádamente del 60%.
+
+![alt text](https://github.com/mangasf/image-fire/blob/master/report/blackfire_3.png)
+
 ## Capturas de la aplicación
 
 ![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_1.png)
 ![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_2.png)
 ![alt text](https://github.com/mangasf/image-fire/blob/master/report/screen_3.png)
+
+## TODO
+
+- Unit Testing (PHPUnit)
+- Tests de Comportamiento (Behat)
 
 ## Autor
 
