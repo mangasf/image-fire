@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require '../../autoload.php';
 
 use Mangasf\ImageFire\Application\Service\QueuesPublishMessage;
@@ -41,6 +38,7 @@ if ($_POST) {
     header("Location: ../../index.php");
 
 } else {
+
     $target_dir = "../../upload/";
     $storage_dir = "upload/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -64,28 +62,31 @@ if ($_POST) {
     $storageImageElastic($image);
     $storageImageRedis($image);
 
-    /*$queuesOrchestrator = new RabbitMQOrchestrator();
+    $queuesOrchestrator = new RabbitMQOrchestrator();
     $queuesPublishMessage = new QueuesPublishMessage($queuesOrchestrator);
 
-    $transformations = [
-        ['transformation' => 'resizeToHeight500', 'tag' => 'resizeToHeight500'],
-        ['transformation' => 'resizeToHeight200', 'tag' => 'resizeToHeight200'],
-        ['transformation' => 'resizeToWidth500', 'tag' => 'resizeToWidth500'],
-        ['transformation' => 'resizeToWidth200', 'tag' => 'resizeToWidth200'],
-        ['transformation' => 'scaleImage50', 'tag' => 'scaleImage50'],
-        ['transformation' => 'addFilter', 'tag' => 'blur'],
-        ['transformation' => 'cropImage200_200', 'tag' => 'cropped200_200']
+    $processes = [
+        'resizeToHeight250',
+        'resizeToWidth250',
+        'resizeToHeight150',
+        'resizeToWidth150',
+        'resizeToHeight75',
+        'resizeToWidth75'
     ];
 
-    foreach ($transformations as $transformation) {
-        $targetTransformedDir = $transformed_dir . $transformation['tag'] . '_' . str_replace(' ', '-', $_FILES['file']['name']);
-        $data = [
-            'current_directory' => $targetDir,
-            'transformation' => $transformation['transformation'],
-            'destination_directory' => $targetTransformedDir,
-            'tag' => $transformation['tag']
+    $storage_dir_processed = "upload_processed/";
+    $target_original_image = 'upload/' . basename($_FILES["file"]["name"]);
+
+    foreach ($processes as $process) {
+
+        $target_image_processed = $storage_dir_processed . $process . '_' . $_FILES['file']['name'];
+
+        $message = [
+            'action' => $process,
+            'src_image' => $target_original_image,
+            'dist_image' => $target_image_processed,
         ];
 
-        $queuesPublishMessage('transformations', $data);
-    }*/
+        $queuesPublishMessage('processes', $message);
+    }
 }

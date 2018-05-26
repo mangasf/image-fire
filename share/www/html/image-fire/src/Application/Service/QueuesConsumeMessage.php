@@ -7,137 +7,55 @@ namespace Mangasf\ImageFire\Application\Service;
 use Mangasf\ImageFire\Domain\ImageTools\ImageProcessor;
 use Mangasf\ImageFire\Domain\Models\Image;
 use Mangasf\ImageFire\Domain\Repositories\StorageImageRepository;
-use Mangasf\ImageFire\Domain\VO\Message;
+use Mangasf\ImageFire\Domain\Entity\Message;
 
 final class QueuesConsumeMessage
 {
     private $imageProcessor;
-    private $repoImageInserter;
+    private $repoInserterMysql;
+    private $repoInserterRedis;
+    private $repoInserterElastic;
 
-    public function __construct(ImageProcessor $imageProcessor, StorageImageRepository $repoImageInserter)
+    public function __construct(
+        ImageProcessor $imageProcessor,
+        StorageImageRepository $repoInserterMysql,
+        StorageImageRepository $repoInserterRedis,
+        StorageImageRepository $repoInserterElastic
+    )
     {
         $this->imageProcessor = $imageProcessor;
-        $this->repoImageInserter = $repoImageInserter;
+        $this->repoInserterMysql = $repoInserterMysql;
+        $this->repoInserterRedis = $repoInserterRedis;
+        $this->repoInserterElastic = $repoInserterElastic;
     }
 
     public function __invoke(Message $message)
     {
-        switch ($message->getProcess()) {
+        $process_val = [
+            'resizeToHeight250' => 250,
+            'resizeToWidth250' => 250,
+            'resizeToHeight150' => 150,
+            'resizeToWidth150' => 150,
+            'resizeToHeight75' => 75,
+            'resizeToWidth75' => 75,
+        ];
 
-            case 'resizeToHeight250':
+        $this->imageProcessor->resizeToHeight(
+            $message->srcImage(), $process_val[$message->action()],
+            $message->distImage()
+        );
 
-                $this->imageProcessor->resizeToHeight(
-                    $message->getImageToProcess(), 250,
-                    $message->getImageProcessedDestination()
-                );
+        $uuid = uniqid();
+        $imageProcessed = new Image(
+            $uuid,
+            explode('/', $message->distImage())[1],
+            $message->distImage(),
+            '',
+            $message->action()
+        );
 
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight250'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-                break;
-
-            case 'resizeToWidth250':
-
-                $this->imageProcessor->resizeToWidth(
-                    $message->getImageToProcess(), 250,
-                    $message->getImageProcessedDestination()
-                );
-
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight250'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-
-                break;
-
-            case 'resizeToHeight150':
-
-                $this->imageProcessor->resizeToHeight(
-                    $message->getImageToProcess(), 150,
-                    $message->getImageProcessedDestination()
-                );
-
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight150'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-                break;
-
-            case 'resizeToWidth150':
-
-                $this->imageProcessor->resizeToWidth(
-                    $message->getImageToProcess(), 150,
-                    $message->getImageProcessedDestination()
-                );
-
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight150'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-
-                break;
-
-            case 'resizeToHeight75':
-
-                $this->imageProcessor->resizeToHeight(
-                    $message->getImageToProcess(), 75,
-                    $message->getImageProcessedDestination()
-                );
-
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight75'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-                break;
-
-            case 'resizeToWidth75':
-
-                $this->imageProcessor->resizeToWidth(
-                    $message->getImageToProcess(), 75,
-                    $message->getImageProcessedDestination()
-                );
-
-                $uuid = uniqid();
-                $imageProcessed = new Image(
-                    $uuid,
-                    'name',
-                    $message->getImageProcessedDestination(),
-                    '',
-                    'resizeToHeight75'
-                );
-
-                $this->repoImageInserter->storageImage($imageProcessed);
-        }
+        $this->repoInserterMysql->storageImage($imageProcessed);
+        $this->repoInserterRedis->storageImage($imageProcessed);
+        $this->repoInserterElastic->storageImage($imageProcessed);
     }
 }

@@ -20,29 +20,4 @@ final class GumletImageProcessor implements ImageProcessor
         $image->resizeToWidth($width);
         $image->save($imageDestination);
     }
-
-    public function cropImage(string $imageSource, int $height, int $width, string $imageDestination): void
-    {
-        $image = new ImageResize($imageSource);
-        $image->crop($width, $height);
-        $image->save($imageDestination);
-    }
-
-    public function addFilter(string $imageSource, string $imageDestination, string $filter): void
-    {
-        $image = new ImageResize($imageSource);
-
-        $image->addFilter(function ($imageDesc) {
-            imagefilter($imageDesc, IMG_FILTER_GAUSSIAN_BLUR);
-        });
-
-        $image->save($imageDestination);
-    }
-
-    public function scaleImage(string $imageSource, int $scale, string $imageDestination): void
-    {
-        $image = new ImageResize($imageSource);
-        $image->scale($scale);
-        $image->save($imageDestination);
-    }
 }

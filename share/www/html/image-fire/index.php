@@ -12,12 +12,11 @@ use Mangasf\ImageFire\Infrastructure\Repositories\MySql\ListImagesMysql;
 use Mangasf\ImageFire\Infrastructure\Repositories\Redis\InitializeRedis;
 use Mangasf\ImageFire\Infrastructure\Repositories\Redis\ListImagesRedis;
 
-if (isset($_POST['Search'])) {
+if (isset($_POST['Search']) && $_POST['searchInput'] !== '') {
     $searchInput = $_POST['searchInput'];
     $searchRepo = new SearchImagesElastic();
     $imagesSearcher = new SearchImages($searchRepo);
     $imagesList = $imagesSearcher($searchInput);
-
 } else {
 
     $listRepoRedis = new ListImagesRedis();
