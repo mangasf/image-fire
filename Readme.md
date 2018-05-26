@@ -65,7 +65,30 @@ Además para mantener la consistencia de datos entre MySql y Redis las operacion
 
 ## RabiitMQ
 
-La integración de RabbitMQ permite a Image Fire la paralelización de la subida de imágenes. Una vez subida una imágen se la debe aplicar una serie de transformaciones (resizes, filtros, etc), con cada una de estas transformaciones asignaremos a la imágen los correspondientes tags que nos permitan luego buscarlas (elastic). Estos trabajos de procesamiento son almacenados en una cola mediante su publicación para ser posteriormente consumidos por uno o más consumers.
+La integración de RabbitMQ permite a Image Fire la paralelización de la subida de imágenes.
+
+Image Fire, una vez subida una imagen, aplica a esta 6 *resizes* distintos. La aplicación de un *resize* a una imagen implica también el agregado de un tag correspondiente a esta, permitiendo luego buscar mediante ElasticSearch imágenes a las que se las a aplicado un procesamiento concreto.
+
+**Procesamientos**:
+
+-  Resize en altura a 250px (#resizeToHeight250).
+-  Resize en anchura a 250px (#resizeToWidth250).
+-  Resize en altura a 150px (#resizeToHeight150).
+-  Resize en anchura a 150px (#resizeToWidth150).
+-  Resize en altura a 75px (#resizeToHeight75).
+-  Resize en anchura a 75px (#resizeToWidth75).
+
+Los resultados del procesamiento de una imágen son almacenados tanto en Mysql como en Redis y ElasticSearch.
+
+Estos trabajos de procesamiento son almacenados en una cola mediante su publicación para ser posteriormente consumidos por un consumer.
+
+Para lanzar el consumer que necesitaremos para llevar a cabo los trabajos usamos el siguiente comando que lo pondrá en escucha:
+
+```
+php consumer.php
+```
+
+Podemos ver el estado de la cola de RabbitMQ a través de su panel de administración (puerto 15672).
 
 ## ElasticSearch
 
