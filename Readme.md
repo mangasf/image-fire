@@ -1,8 +1,8 @@
 # Image Fire
 
-Image Fire es una aplicación a modo de kata cuyo objetivo es la prueba e integración de distintas herramientas enfocadas al desarrollo de aplicaciones web de alto rendimiento.
+Image Fire es un proyecto a modo de kata cuyo objetivo es probar la integración de distintas herramientas enfocadas al desarrollo de aplicaciones web de alto rendimiento.
 
-Las herramientas de las que hace uso la aplicación son:
+Las herramientas que usa Image Fire son:
 
 - ElasticSearch
 - RabbitMQ
@@ -55,7 +55,7 @@ Redis es un almacén de estructura de datos de valores de clave en memoria rápi
 
 La integración de Redis en Image Fire tiene como objetivo aumentar la disponibilidad de los datos haciendo de cache, agiliza las consultas sobre las imágenes almacenadas.
 
-En el siguiente diagrama podemos ver un diagrama de flujo del caso de uso encargado del listado de imágenes guardadas:
+En la siguiente imagen podemos ver un diagrama de flujo del caso de uso encargado del listado de imágenes guardadas:
 
 ![alt text](https://github.com/mangasf/image-fire/blob/master/report/redis-diagram.png)
 
@@ -63,9 +63,11 @@ Además para mantener la consistencia de datos entre MySql y Redis las operacion
 
 *El potencial de Redis en Image Fire no es totalmente explotado debido a la sencillez de los casos de uso, sacaríamos un mayor provecho al ampliar la aplicación y añadir funcionalidades que requieran de un mayor numero de consultas sobre nuestro modelo de datos.*
 
-## RabiitMQ
+## RabbitMQ
 
-La integración de RabbitMQ permite a Image Fire la paralelización de la subida de imágenes.
+RabbitMQ es un software de negociación de mensajes de código abierto, y entra dentro de la categoría de middleware de mensajería.
+
+La integración de RabbitMQ permite a Image Fire paralelizar los procesamientos aplicados a cada imagen una vez que estas son suidas.
 
 Image Fire, una vez subida una imagen, aplica a esta 6 *resizes* distintos. La aplicación de un *resize* a una imagen implica también el agregado de un tag correspondiente a esta, permitiendo luego buscar mediante ElasticSearch imágenes a las que se las a aplicado un procesamiento concreto.
 
