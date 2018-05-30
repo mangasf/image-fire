@@ -19,7 +19,6 @@ final class UpdateImageElastic implements UpdateImageRepository
 
     public function updateImage(Image $image)
     {
-        var_dump($image);
         $params = [
             'index' => 'image_fire',
             'type' => 'my_type',

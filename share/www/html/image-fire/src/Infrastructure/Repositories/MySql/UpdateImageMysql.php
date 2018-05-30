@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Mangasf\ImageFire\Infrastructure\Repositories\MySql;
 
 use Mangasf\ImageFire\Domain\Models\Image;
-use Mangasf\ImageFire\Domain\Repositories\StorageImageRepository;
 use Mangasf\ImageFire\Domain\Repositories\UpdateImageRepository;
 use PDO;
 use PDOException;
